@@ -25,7 +25,7 @@ $router->group('/api/', function () use ($router) {
 
 
     $router->get('/json', function (Request $request) {
-        $data = array("a" => "Apple", "b" => "Ball", "c" => "Cat");
+        $data = array("a" => "Apple", "b" => "Ball", "c" => "222222");
         return response($data);
     });
 

@@ -115,6 +115,12 @@ final class Router
         $this->prefix = '';
     }
 
+    //TODO: Use real middleware
+    private function access()
+    {
+
+    }
+
     private function executeRoute(Route $route, $params = []): void
     {
         $method = $route->getMethod();

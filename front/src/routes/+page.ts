@@ -6,6 +6,6 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	const item = await res.json();
 	console.log(item);
 	return {
-		item
+		...item
 	};
 };
