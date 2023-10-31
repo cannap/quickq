@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  sveltekit:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    working_dir: /app
+    volumes:
+      - ./front:/app
+      - sveltekit_node_modules:/app/node_modules  # Benanntes Volumen für node_modules
+    ports:
+      - 5173:5173
+    environment:
+      - NODE_ENV=development
+
+  caddy:
+    image: caddy:2
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+    ports:
+      - 80:80
+      - 443:443
+
+  php:
+    image: php:8.2-fpm
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    volumes:
+      - ./server:/var/www/html
+    ports:
+      - "9000:9000"
+
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: quickq_dev
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
+  caddy_data:
+  sveltekit_node_modules:  # Benanntes Volumen definieren
+
+

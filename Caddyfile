@@ -1,0 +1,8 @@
+:80 {
+    root * /var/www/html/public
+    file_server
+    
+    php_fastcgi php:9000
+
+   rewrite * /index.php?{query}&p={path}
+}
