@@ -14,34 +14,11 @@ $router->get('/info', function () {
 });
 
 
-$router->group('/api/', function () use ($router) {
-
-    $router->get('/user/{userID}', function (Request $request) {
-
-        $params = $request->params(['userID']);
-
-        return response($params, 200);
-    });
-
-
-    $router->get('/json', function (Request $request) {
-        $data = array("a" => "Apple", "b" => "Ball", "c" => "222222");
-        return response($data);
-    });
-
-    $router->get('/register', function (Request $request) {
-        $email = "beispiel@email.com";
-        $username = "BeispielBenutzer";
-
-        $stmt = db()->pdo->prepare('INSERT INTO users(email,username) VALUES (?,?)');
-        $data = $stmt->execute(['hello@world.com', 'oghgo']);
-        echo $data;
-    });
-});
 $router->group('/admin/', function () use ($router) {
     $router->get('/hi/', function (Request $request) {
-        echo "Hello World";
+        return 'Hello World';
     });
+
 });
 
 

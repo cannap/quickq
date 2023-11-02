@@ -8,7 +8,7 @@ use PDO;
 class Connection
 {
 
-    public $pdo;
+    public PDO $pdo;
 
     public function __construct()
     {

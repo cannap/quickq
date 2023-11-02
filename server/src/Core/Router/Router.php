@@ -8,8 +8,8 @@ use Framework\Core\Http\Request;
 final class Router
 {
     /** @var Route[] */
-    private $routesCollection = [];
-    private $prefix;
+    private array $routesCollection = [];
+    private string $prefix = '';
 
     // protected  $methods = array();
 
@@ -53,6 +53,7 @@ final class Router
         return $this->routesCollection[$route] = new Route($route, $method, $callback);
     }
 
+
     /**
      * @param $route
      * @return string
@@ -79,7 +80,6 @@ final class Router
         $matched = false;
 
         foreach ($this->routesCollection as $route) {
-            //Match static routes
             if ($route->getRoute() === $currentURI && !$route->hasParams()) {
                 $matched = true;
                 $this->executeRoute($route);
@@ -87,23 +87,20 @@ final class Router
             }
 
             $pattern = $route->getPattern();
-
             if (preg_match($pattern, $currentURI, $matches)) {
-                //  sage($matches);
                 array_shift($matches);
-                //    sage($matches);
                 if ($_SERVER['REQUEST_METHOD'] === $route->getMethod()) {
                     $this->executeRoute($route, $matches);
+                    return;
                 } else {
-                    echo "Unknown method";
+                    http_response_code(405);
+                    return;
                 }
-                return;
             }
         }
-        if (!$matched) {
-            echo "404 Not Found LOl";
-            sd($_SERVER);
 
+        if (!$matched) {
+            http_response_code(404);
         }
     }
 
@@ -115,11 +112,6 @@ final class Router
         $this->prefix = '';
     }
 
-    //TODO: Use real middleware
-    private function access()
-    {
-
-    }
 
     private function executeRoute(Route $route, $params = []): void
     {
