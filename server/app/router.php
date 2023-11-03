@@ -7,18 +7,6 @@ use Framework\Core\Contract\MiddlewareInterface;
 use Framework\Core\Router\Router;
 
 
-class Auth implements MiddlewareInterface
-{
-    public function handle(Request $request, callable $next): Response
-    {
-        /* @var Response $response */
-        $response = $next($request);
-
-        $response->header('wtf', 'fewrf');
-        return $response;
-    }
-}
-
 $router = new Router();
 
 $router->get('/info', function () {
