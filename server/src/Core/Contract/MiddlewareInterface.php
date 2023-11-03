@@ -1,6 +1,6 @@
 <?php
 
-namespace Framework\Core\Middleware;
+namespace Framework\Core\Contract;
 
 use Framework\Core\Http\Request;
 

@@ -5,7 +5,7 @@ namespace Framework\Core\Router;
 
 use Framework\Core\Http\Request;
 use Framework\Core\Http\Response;
-use Framework\Core\Middleware\MiddlewareInterface;
+use Framework\Core\Contract\MiddlewareInterface;
 use InvalidArgumentException;
 
 
