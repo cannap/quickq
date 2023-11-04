@@ -2,8 +2,6 @@
 
 
 use Framework\Core\Http\Request;
-use Framework\Core\Http\Response;
-use Framework\Core\Contract\MiddlewareInterface;
 use Framework\Core\Router\Router;
 
 
@@ -18,7 +16,8 @@ $router->get('/info', function () {
 
 $router->group('/admin/', function () use ($router) {
     $router->get('/hi/', function (Request $request) {
-    })->addMiddleware(new Auth());
+        return 'hi';
+    });
 
 });
 
