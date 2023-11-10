@@ -11,7 +11,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Installieren Sie die Projektabhängigkeiten
-RUN npm ci
+RUN npm install --verbose
 
 # Kopieren Sie den Rest des Codes
 COPY . .

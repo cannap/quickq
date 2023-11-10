@@ -50,7 +50,7 @@ class Response
             }
             return $content;
         }
-
+        dd($this->content);
         return $this->content;
     }
 

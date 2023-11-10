@@ -2,13 +2,14 @@ version: '3.8'
 
 services:
   sveltekit:
+    command: /bin/sh -c "npm install"
     build:
       context: ./front
       dockerfile: Dockerfile
     working_dir: /app
     volumes:
       - ./front:/app
-      - sveltekit_node_modules:/app/node_modules  # Benanntes Volumen für node_modules
+      - sveltekit_node_modules:/app/node_modules
     ports:
       - 5173:5173
     environment:
