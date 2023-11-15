@@ -46,10 +46,20 @@ services:
 
     volumes:
       - mysql-data:/var/lib/mysql
+  couchdb:
+    image: couchdb:latest
+    ports:
+      - "5984:5984"
+    environment:
+      COUCHDB_USER: admin
+      COUCHDB_PASSWORD: password
+    volumes:
+      - couchdb_data:/opt/couchdb/data
 
 volumes:
   mysql-data:
   caddy_data:
+  couchdb_data:
   sveltekit_node_modules:  # Benanntes Volumen definieren
 
 
