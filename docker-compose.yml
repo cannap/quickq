@@ -2,7 +2,6 @@ version: '3.8'
 
 services:
   sveltekit:
-    command: /bin/sh -c "npm install"
     build:
       context: ./front
       dockerfile: Dockerfile
@@ -14,6 +13,18 @@ services:
       - 5173:5173
     environment:
       - NODE_ENV=development
+
+  bun:
+    build:
+      context: ./front
+
+    image: oven/bun:latest
+    command: bun --watch run dev
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./shared:/app  # Korrekte Volumen-Einbindung
 
   caddy:
     image: caddy:2
@@ -43,9 +54,9 @@ services:
       MYSQL_DATABASE: quickq_dev
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-
     volumes:
       - mysql-data:/var/lib/mysql
+
   couchdb:
     image: couchdb:latest
     ports:
@@ -60,6 +71,5 @@ volumes:
   mysql-data:
   caddy_data:
   couchdb_data:
-  sveltekit_node_modules:  # Benanntes Volumen definieren
-
-
+  shared:
+  sveltekit_node_modules:
